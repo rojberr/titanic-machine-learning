@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN curl -sSL https://install.python-poetry.org/ | python3 -
 
-RUN /root/.poetry/bin/poetry config virtualenvs.create false \
-    && /root/.poetry/bin/poetry install --no-interaction --no-ansi
+RUN poetry config virtualenvs.create false --local \
+    && poetry install --no-interaction --no-ansi
 
 CMD ["python", "code/train.py"]
