@@ -2,7 +2,8 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-COPY . .
+COPY /code .
+COPY /notebooks .
 
 RUN apt-get update && apt-get install -y \
     curl \
@@ -10,7 +11,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN curl -sSL https://install.python-poetry.org/ | python3 -
 
-RUN poetry config virtualenvs.create false --local \
-    && poetry install --no-interaction --no-ansi
+#RUN ~/.local/share/pypoetry/venv/bin/poetry config virtualenvs.create false --local \
+#    && ~/.local/share/pypoetry/venv/bin/poetry install --no-interaction --no-ansi
 
 CMD ["python", "code/train.py"]
