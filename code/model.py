@@ -93,5 +93,8 @@ class DecisionTreeClassifier:
                 child.next = self._id3_recv(child_x_ids, feature_ids, child.next)  # recursion
         return node
 
-    def predict(self, ):
+    def predict(self, dataframe):
+        if self.node is None:
+            print("Train me first: tree.id3()")
+            return 1
         return "survived"

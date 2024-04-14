@@ -1,5 +1,13 @@
-python3 train.py \
+#!/bin/bash
+
+set -e # Break on error
+
+python3 data_preprocessing.py \
   --data_file=../data/put-titanic-homework.csv \
+  --output_csv=./data.csv
+
+python3 train.py \
+  --data_file=./data.csv \
   --output_file=./model.pkl \
   --omit_columns=PassengerId,Name \
   --target=Survived
