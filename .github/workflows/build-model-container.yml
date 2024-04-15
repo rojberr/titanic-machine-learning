@@ -8,9 +8,9 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  preprocess-data:
-    runs-on: ubuntu-latest
 
+  preprocess-data-train-and-test-model:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
@@ -24,24 +24,46 @@ jobs:
       - name: 'Run preprocessing script'
         run: |
           python ./code/preprocess_data.py  --data_file=./data/put-titanic-homework.csv --output_csv=./data.csv
+      - name: 'Train model'
+        run: |
+          python ./code/train.py \
+          --data_file=./data.csv \
+          --output_file=./model.pkl \
+          --omit_columns=PassengerId,Name \
+          --target=Survived
+      - name: 'Test model'
+        run: |
+          python ./code/test.py \
+          --test_data=./data.csv \
+          --model_file=./model.pkl \
+          --output_file=./test_output.csv
       - name: 'Upload preprocessed data'
         uses: actions/upload-artifact@v4
         with:
-          name: data.csv
-          path: ./data.csv
+          name: model-artifacts
+          path: |
+            ./data.csv
+            ./model.pkl
+            ./test_output.csv
           retention-days: 3
 
-  build-and-push-image:
+  build-and-push-model-image:
     runs-on: ubuntu-latest
+    needs: preprocess-data-train-and-test-model
     # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
     permissions:
       contents: read
       packages: write
       #
     steps:
-      - name: Checkout repository
+      - name: 'Checkout repository'
         uses: actions/checkout@v4
       # Uses the `docker/login-action` action to log in to the Container registry registry using the account and password that will publish the packages. Once published, the packages are scoped to the account defined here.
+      - name: 'Download model artifacts'
+        uses: actions/download-artifact@v4
+        with:
+          name: model-artifacts
+          path: ./code
       - name: Log in to the Container registry
         uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
         with:
