@@ -98,7 +98,7 @@ class DecisionTreeClassifier:
             return node.value
         else:
             for child in node.childs:
-                if str(child.value) in str(line[node.value]):
+                if str(child.value) == str(line[node.value]):
                     return self._predict_line(child.next, line)
 
     def predict(self, dataframe):

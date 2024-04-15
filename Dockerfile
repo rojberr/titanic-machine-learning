@@ -2,8 +2,7 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-COPY /code .
-COPY /notebooks .
+COPY /code/predict.py .
 
 RUN apt-get update && apt-get install -y \
     curl \
