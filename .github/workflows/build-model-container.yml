@@ -1,4 +1,4 @@
-name: Create and publish a Docker image with predicting model
+name: Create ID3 model and publish as Docker image
 
 # Manual workflow
 on: workflow_dispatch
@@ -17,6 +17,10 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.12'
+      - name: Install pip dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r ./requirements.txt
       - name: 'Run preprocessing script'
         run: |
           python ./code/preprocess_data.py  --data_file=../data/put-titanic-homework.csv --output_csv=./data.csv

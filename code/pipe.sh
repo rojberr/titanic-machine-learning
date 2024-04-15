@@ -2,7 +2,9 @@
 
 set -e # Break on error
 
-python3 data_preprocessing.py \
+cd "$(dirname "$0")" # Set working directory to the directory of the script
+
+python3 preprocess_data.py \
   --data_file=../data/put-titanic-homework.csv \
   --output_csv=./data.csv
 
