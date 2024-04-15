@@ -8,6 +8,8 @@ https://www.kaggle.com/competitions/titanic/overview
 
 The goal is to predict whether a passenger survived or not based on the features in the dataset.
 
+![iceberg](./data/iceberg.jpeg)
+
 ## Algorithm
 
 The [iterative_dichotomiser_3.ipynb](notebooks/iterative_dichotomiser_3.ipynb) Jupyter notebook contains
