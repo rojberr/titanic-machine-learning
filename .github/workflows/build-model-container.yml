@@ -23,12 +23,12 @@ jobs:
           pip install -r ./requirements.txt
       - name: 'Run preprocessing script'
         run: |
-          python ./code/preprocess_data.py  --data_file=../data/put-titanic-homework.csv --output_csv=./data.csv
+          python ./code/preprocess_data.py  --data_file=./data/put-titanic-homework.csv --output_csv=./data.csv
       - name: 'Upload preprocessed data'
         uses: actions/upload-artifact@v4
         with:
           name: data.csv
-          path: ./code/data.csv
+          path: ./data.csv
           retention-days: 3
 
   build-and-push-image:
