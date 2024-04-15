@@ -1,16 +1,32 @@
-#
-name: Create and publish a Docker image
+name: Create and publish a Docker image with predicting model
 
-# Configures this workflow to be triggered manually.
+# Manual workflow
 on: workflow_dispatch
 
-# Defines two custom environment variables for the workflow. These are used for the Container registry domain, and a name for the Docker image that this workflow builds.
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 
-# There is a single job in this workflow. It's configured to run on the latest available version of Ubuntu.
 jobs:
+  preprocess-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+      - name: 'Run preprocessing script'
+        run: |
+          python ./code/preprocess_data.py  --data_file=../data/put-titanic-homework.csv --output_csv=./data.csv
+      - name: 'Upload preprocessed data'
+        uses: actions/upload-artifact@v4
+        with:
+          name: data.csv
+          path: ./code/data.csv
+          retention-days: 3
+
   build-and-push-image:
     runs-on: ubuntu-latest
     # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
