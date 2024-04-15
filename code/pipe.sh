@@ -13,7 +13,7 @@ python3 train.py \
   --target=Survived
 
 python3 test.py \
-  --test_data=./test-data.csv \
+  --test_data=./data.csv \
   --model_file=./model.pkl \
   --output_file=./test_output.csv
 

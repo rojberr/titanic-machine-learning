@@ -21,4 +21,4 @@ if __name__ == '__main__':
     print(output_df)
 
     output_df.to_csv(args.output_file, index=False)
-
+    print(f"[INFO]: This script predicted output based on ID3 tree and saved it in {args.output_file} file.")
