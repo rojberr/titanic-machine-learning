@@ -14,6 +14,10 @@ python3 train.py \
   --omit_columns=PassengerId,Name \
   --target=Survived
 
+python3 plot.py \
+  --model_file=./model.pkl \
+  --output_plot_file=./plot.txt
+
 python3 test.py \
   --test_data=./data.csv \
   --model_file=./model.pkl \
