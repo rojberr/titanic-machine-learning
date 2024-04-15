@@ -16,7 +16,7 @@ python3 train.py \
 
 python3 plot.py \
   --model_file=./model.pkl \
-  --output_plot_file=./plot.txt
+  --output_file=./plot.txt
 
 python3 test.py \
   --test_data=./data.csv \

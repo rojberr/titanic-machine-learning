@@ -23,7 +23,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Train ID3 tree")
     parser.add_argument("--model_file", type=str,
                         help="<model_pickle_path> f.e. ./model.pkl", required=True)
-    parser.add_argument("--output_plot_file", type=str,
+    parser.add_argument("--output_file", type=str,
                         help="<output_plot_path> f.e. ./output_plot.jpg", required=True)
     args = parser.parse_args()
 
@@ -32,8 +32,8 @@ if __name__ == '__main__':
 
     print_tree(id3_tree.node)
 
-    with open(args.output_plot_file, 'w') as file:
+    with open(args.output_file, 'w') as file:
         with redirect_stdout(file):
             print_tree(id3_tree.node)
 
-    print(f"[INFO]: This script plotted ID3 tree model and saved it in {args.output_plot_file} file.")
+    print(f"[INFO]: This script plotted ID3 tree model and saved it in {args.output_file} file.")

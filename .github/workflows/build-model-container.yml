@@ -31,6 +31,11 @@ jobs:
           --output_file=./model.pkl \
           --omit_columns=PassengerId,Name \
           --target=Survived
+      - name: 'Plot model'
+        run: |
+          python ./code/plot.py \
+          --model_file=./model.pkl \
+          --output_file=./plot.txt
       - name: 'Test model'
         run: |
           python ./code/test.py \
@@ -45,6 +50,7 @@ jobs:
             ./data.csv
             ./model.pkl
             ./test_output.csv
+            ./plot.txt
           retention-days: 3
 
   build-and-push-model-image:
