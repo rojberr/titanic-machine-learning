@@ -6,7 +6,7 @@ import model
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Train ID3 tree")
     parser.add_argument("--data_file", type=str,
-                        help="<datafile_path> f.e. ../data/put-titanic-homework.csv", required=True)
+                        help="<datafile_path> f.e. ../data.csv", required=True)
     parser.add_argument("--output_file", type=str,
                         help="<output_pickle_path> f.e. ./model.pkl", required=True)
     parser.add_argument("--omit_columns", type=str,
@@ -32,4 +32,4 @@ if __name__ == '__main__':
     with open(args.output_file, 'wb') as file:
         pickle.dump(titanic_tree, file)
 
-    print("[INFO]: This script trained ID3 tree and saved it in ./id3_tree.pickle file.")
+    print(f"[INFO]: This script trained ID3 tree and saved it in {args.output_file} file as pickle.")

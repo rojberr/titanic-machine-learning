@@ -59,14 +59,14 @@ class DecisionTreeClassifier:
 
     def id3(self):
         x_ids = [x for x in range(len(self.X))]  # id assign instance
-        feature_ids = [x for x in range(len(self.feature_names))]  # id assign faeture
+        feature_ids = [x for x in range(len(self.feature_names))]  # id assign feature
         self.node = self._id3_recv(x_ids, feature_ids, self.node)
 
     def _id3_recv(self, x_ids, feature_ids, node):
         if not node:
             node = Node()
         labels_in_features = [self.labels[x] for x in x_ids]  # sort labels by instance id
-        if len(set(labels_in_features)) == 1:  # for all surviced or not surviced return 1 or 0
+        if len(set(labels_in_features)) == 1:  # for all survived or not survived return 1 or 0
             node.value = self.labels[x_ids[0]]
             return node
         if len(feature_ids) == 0:  # for no more features left return most probable label
@@ -93,8 +93,24 @@ class DecisionTreeClassifier:
                 child.next = self._id3_recv(child_x_ids, feature_ids, child.next)  # recursion
         return node
 
+    def _predict_line(self, node, line):
+        if node.next is None and node.childs is None:
+            return node.value
+        else:
+            for child in node.childs:
+                if str(child.value) in str(line[node.value]):
+                    return self._predict_line(child.next, line)
+
     def predict(self, dataframe):
+
         if self.node is None:
-            print("Train me first: tree.id3()")
+            print("[ERROR]: Train me first: tree.id3()")
             return 1
-        return "survived"
+
+        predicted = []
+        for index, line in dataframe.iterrows():
+            result = self._predict_line(self.node, line)
+            predicted.append(result)
+        dataframe['Predicted'] = predicted
+
+        return dataframe

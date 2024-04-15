@@ -12,9 +12,12 @@ python3 train.py \
   --omit_columns=PassengerId,Name \
   --target=Survived
 
+python3 test.py \
+  --test_data=./test-data.csv \
+  --model_file=./model.pkl \
+  --output_file=./test_output.csv
+
 python3 predict.py \
-#  --data_file=../data/put-titanic-homework.csv \
-#  --input_model=./model.pkl \
-#  --output_file=./output.csv \
-#  --omit_features=PassengerId,Name,Ticket,Cabin \
-#  --target=Survived
+  --data_file=./data.csv \
+  --model_file=./model.pkl \
+  --output_file=./output.csv
