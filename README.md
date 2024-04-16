@@ -74,10 +74,15 @@ docker buid -t IMAGE_NAME .
 
 ## TODO:
 
-- [ ] build model artifact as pickle
-- [ ] build internference.py - python funciton that preproces input features and passes them to model
+- [x] build model artifact as pickle
+- [x] build interference.py - python function that preprocess input features and passes them to model
 - [ ] rest api wrapper fastapi / flask
 - [ ] modify the dockerfile
-- [ ] create train pipeline - pulls from datastore and creates model and saves it
-- [ ] Add testing pipeline - takes the model and tests it
+- [x] create train pipeline - pulls from datastore and creates model and saves it
+- [x] Add testing pipeline - takes the model and tests it
 - [ ] Add interference pipeline - somebody inputs data and expects a prediction
+- [ ] Plot in jpg
+- [ ] Try your model on dataset from kaggle
+- [ ] Add page/flow for error analysis (I want to build better models by trying and seeing what is wrong, 
+if the model got better or worse)
+- [ ] Test you model on training dataset, to assume how good it would be on dev set
