@@ -22,8 +22,9 @@ if __name__ == '__main__':
 
     output_df.to_csv(args.output_file, index=False)
 
-    # Check last 2 columns
-    last_two_columns = output_df.iloc[:, -2:]
+    # Check predict and survived columns
+    last_two_columns = output_df[['Survived', 'Predicted']]
+    #last_two_columns = output_df.iloc[:, -2:]
     equal_values = (last_two_columns.iloc[:, 0] == last_two_columns.iloc[:, 1]).sum()
 
     # Calculate percentage

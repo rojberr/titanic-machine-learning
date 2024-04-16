@@ -18,10 +18,17 @@ python3 plot.py \
   --model_file=./model.pkl \
   --output_file=./plot.txt
 
+# Test on same data as trained
 python3 test.py \
   --test_data=./data.csv \
   --model_file=./model.pkl \
-  --output_file=./test_output.csv
+  --output_file=./test_output_1.csv
+
+# Test on kaggle data
+python test.py \
+  --test_data=../data/kaggle-titanic-train.csv \
+  --model_file=./model.pkl \
+  --output_file=./test_output_2.csv
 
 python3 predict.py \
   --data_file=./data.csv \
