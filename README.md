@@ -16,7 +16,7 @@ To predict which passengers survived the Titanic disaster, you can use the Docke
 Run the container:
 
 ```bash
-docker run ghcr.io/rojberr/titanic-machine-learning:master -p 5000:5000
+docker run -p 5000:5000 ghcr.io/rojberr/titanic-machine-learning:master
 ```
 
 ... then open `http://127.0.0.1:5000/` with your browser, input yours passenger data and predict if he or she survived
