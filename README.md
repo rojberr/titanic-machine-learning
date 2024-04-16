@@ -10,6 +10,27 @@ The goal is to predict whether a passenger survived or not based on the features
 
 ![iceberg](./data/iceberg.jpeg)
 
+## Usage
+
+To predict which passengers survived the Titanic disaster, you can use the Docker image with ID3 algorithm.
+Run the container:
+
+```bash
+docker run ghcr.io/rojberr/titanic-machine-learning:master -p 5000:5000
+```
+
+... then open `http://127.0.0.1:5000/` with your browser, input yours passenger data and predict if he or she survived
+or not.
+
+To build locally and run the container use:
+
+```bash
+docker build -t predict .
+docker run -p 5000:5000 predict
+```
+
+... then open `http://127.0.0.1:5000/` with your browser.
+
 ## Algorithm
 
 The [iterative_dichotomiser_3.ipynb](notebooks/iterative_dichotomiser_3.ipynb) Jupyter notebook contains
@@ -62,14 +83,6 @@ ID3 (...) - not tested yet (#TODO)
 It needs to be noted that the results are based on the training dataset from Kaggle website and our ID3 tree was trained
 using a slightly simplier dataset using less features.
 
-## Build
-
-To build the container locally use:
-
-```bash
-docker buid -t IMAGE_NAME .
-```
-
 ![img.png](img.png)
 
 ## TODO:
@@ -83,6 +96,6 @@ docker buid -t IMAGE_NAME .
 - [ ] Add interference pipeline - somebody inputs data and expects a prediction
 - [ ] Plot in jpg
 - [ ] Try your model on dataset from kaggle
-- [ ] Add page/flow for error analysis (I want to build better models by trying and seeing what is wrong, 
-if the model got better or worse)
+- [ ] Add page/flow for error analysis (I want to build better models by trying and seeing what is wrong,
+  if the model got better or worse)
 - [ ] Test you model on training dataset, to assume how good it would be on dev set

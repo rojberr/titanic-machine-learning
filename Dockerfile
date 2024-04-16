@@ -1,17 +1,16 @@
-FROM python:3.9-slim
+FROM python:3.12-slim
 
-WORKDIR /app
+RUN pip install Flask pandas
 
-COPY /code/predict.py .
-COPY /code/model.py .
+ENV FLASK_APP=app.py
 
-RUN apt-get update && apt-get install -y \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
+WORKDIR /code
 
-RUN curl -sSL https://install.python-poetry.org/ | python3 -
+COPY code/app.py .
+COPY code/templates/* templates/
+COPY code/model.pkl .
+COPY code/model.py .
 
-#RUN ~/.local/share/pypoetry/venv/bin/poetry config virtualenvs.create false --local \
-#    && ~/.local/share/pypoetry/venv/bin/poetry install --no-interaction --no-ansi
+EXPOSE 5000
 
-CMD ["python", "code/train.py"]
+CMD ["flask", "run", "--host", "0.0.0.0"]
